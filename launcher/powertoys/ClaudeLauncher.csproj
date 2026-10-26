@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- PowerToys Run 本体と同じランタイム（PowerToys 0.88 は .NET 9） -->
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <AssemblyName>Community.PowerToys.Run.Plugin.ClaudeLauncher</AssemblyName>
+    <RootNamespace>Community.PowerToys.Run.Plugin.ClaudeLauncher</RootNamespace>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <PowerToysDir Condition="'$(PowerToysDir)' == ''">$(LOCALAPPDATA)\PowerToys</PowerToysDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Wox.Plugin">
+      <HintPath>$(PowerToysDir)\Wox.Plugin.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="plugin.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="Images\**" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

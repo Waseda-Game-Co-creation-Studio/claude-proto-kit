@@ -1,0 +1,13 @@
+{
+  "ID": "C1A0DE5E7B2F4E8A9D3C6B1F0E4A2D7C",
+  "ActionKeyword": "",
+  "IsGlobal": true,
+  "Name": "Claude Launcher",
+  "Author": "Waseda-Game-Co-creation-Studio",
+  "Version": "1.0.0",
+  "Language": "csharp",
+  "Website": "https://claude.com/claude-code",
+  "ExecuteFileName": "Community.PowerToys.Run.Plugin.ClaudeLauncher.dll",
+  "IcoPathDark": "Images\\claude.png",
+  "IcoPathLight": "Images\\claude.png"
+}

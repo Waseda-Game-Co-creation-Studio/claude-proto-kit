@@ -1,0 +1,15 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+
+# Windows PowerShell 5.1 は BOM なしの UTF-8 を Shift-JIS として読むので、BOM を付ける
+[*.ps1]
+charset = utf-8-bom
+end_of_line = crlf
+
+# irm ... | iex で流し込むので、BOM を付けず ASCII だけで書く
+[install.ps1]
+charset = utf-8

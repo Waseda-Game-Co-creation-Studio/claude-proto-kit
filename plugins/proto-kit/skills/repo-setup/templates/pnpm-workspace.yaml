@@ -1,0 +1,10 @@
+packages:
+  - "packages/*"
+# wrangler が依存する esbuild / workerd のインストールスクリプトだけ許可する
+allowBuilds:
+  esbuild: true
+  workerd: true
+# Slidev 公式のエージェント用スキルを .claude/skills に入れてよい
+permissions:
+  '@slidev/cli':
+    skills: true

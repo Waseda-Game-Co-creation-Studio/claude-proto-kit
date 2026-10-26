@@ -1,0 +1,12 @@
+{
+  "name": "claude-proto-kit",
+  "owner": { "name": "Waseda-Game-Co-creation-Studio" },
+  "description": "Claude Code で手早くプロトタイプを作るためのプラグイン（R3F / Slidev / Remotion / Cloudflare）",
+  "plugins": [
+    {
+      "name": "proto-kit",
+      "source": "./plugins/proto-kit",
+      "description": "Web / 3D プロトタイプ、スライド、PV を作って Cloudflare に公開するまでのスキルとコマンド"
+    }
+  ]
+}

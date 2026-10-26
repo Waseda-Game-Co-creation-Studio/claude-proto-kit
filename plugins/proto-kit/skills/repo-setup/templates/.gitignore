@@ -1,0 +1,11 @@
+node_modules/
+dist/
+out/
+.wrangler/
+.dev.vars
+.env*
+*.mp4
+*.webm
+*.mov
+.DS_Store
+CLAUDE.local.md

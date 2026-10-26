@@ -1,0 +1,79 @@
+{
+  "extraKnownMarketplaces": {
+    "claude-proto-kit": {
+      "source": {
+        "source": "github",
+        "repo": "Waseda-Game-Co-creation-Studio/claude-proto-kit"
+      },
+      "autoUpdate": true
+    },
+    "cloudflare": {
+      "source": {
+        "source": "github",
+        "repo": "cloudflare/skills"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "proto-kit@claude-proto-kit": true,
+    "cloudflare@cloudflare": true
+  },
+  "permissions": {
+    "ask": [
+      "Bash(npx wrangler deploy *)",
+      "Bash(npx wrangler delete *)",
+      "Bash(npx wrangler rollback *)",
+      "Bash(npx wrangler versions deploy *)",
+      "Bash(npx wrangler secret *)",
+      "Bash(npx wrangler r2 bucket delete *)",
+      "Bash(npx wrangler r2 object delete *)",
+      "Bash(npx wrangler kv namespace delete *)",
+      "Bash(npx wrangler d1 delete *)",
+      "Bash(pnpm exec wrangler deploy *)",
+      "Bash(pnpm exec wrangler delete *)",
+      "Bash(pnpm exec wrangler rollback *)",
+      "Bash(pnpm exec wrangler versions deploy *)",
+      "Bash(pnpm exec wrangler secret *)",
+      "Bash(pnpm exec wrangler r2 bucket delete *)",
+      "Bash(pnpm exec wrangler r2 object delete *)",
+      "Bash(pnpm exec wrangler kv namespace delete *)",
+      "Bash(pnpm exec wrangler d1 delete *)",
+      "Bash(wrangler deploy *)",
+      "Bash(wrangler delete *)",
+      "Bash(wrangler rollback *)",
+      "Bash(wrangler versions deploy *)",
+      "Bash(wrangler secret *)",
+      "Bash(wrangler r2 bucket delete *)",
+      "Bash(wrangler r2 object delete *)",
+      "Bash(wrangler kv namespace delete *)",
+      "Bash(wrangler d1 delete *)",
+      "PowerShell(npx wrangler deploy *)",
+      "PowerShell(npx wrangler delete *)",
+      "PowerShell(npx wrangler rollback *)",
+      "PowerShell(npx wrangler versions deploy *)",
+      "PowerShell(npx wrangler secret *)",
+      "PowerShell(npx wrangler r2 bucket delete *)",
+      "PowerShell(npx wrangler r2 object delete *)",
+      "PowerShell(npx wrangler kv namespace delete *)",
+      "PowerShell(npx wrangler d1 delete *)",
+      "PowerShell(pnpm exec wrangler deploy *)",
+      "PowerShell(pnpm exec wrangler delete *)",
+      "PowerShell(pnpm exec wrangler rollback *)",
+      "PowerShell(pnpm exec wrangler versions deploy *)",
+      "PowerShell(pnpm exec wrangler secret *)",
+      "PowerShell(pnpm exec wrangler r2 bucket delete *)",
+      "PowerShell(pnpm exec wrangler r2 object delete *)",
+      "PowerShell(pnpm exec wrangler kv namespace delete *)",
+      "PowerShell(pnpm exec wrangler d1 delete *)",
+      "PowerShell(wrangler deploy *)",
+      "PowerShell(wrangler delete *)",
+      "PowerShell(wrangler rollback *)",
+      "PowerShell(wrangler versions deploy *)",
+      "PowerShell(wrangler secret *)",
+      "PowerShell(wrangler r2 bucket delete *)",
+      "PowerShell(wrangler r2 object delete *)",
+      "PowerShell(wrangler kv namespace delete *)",
+      "PowerShell(wrangler d1 delete *)"
+    ]
+  }
+}

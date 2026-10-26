@@ -1,0 +1,29 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "claude-launcher",
+  "title": "Claude Launcher",
+  "description": "フォルダ名を入力して Claude Code を開く",
+  "icon": "claude.png",
+  "author": "Waseda-Game-Co-creation-Studio",
+  "license": "MIT",
+  "commands": [
+    {
+      "name": "index",
+      "title": "Open in Claude Code",
+      "description": "ホーム直下のリポジトリと sandbox の実験から選んで Claude Code を開く",
+      "mode": "view"
+    }
+  ],
+  "dependencies": {
+    "@raycast/api": "^2.9.0",
+    "@raycast/utils": "^2.3.3"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0"
+  },
+  "scripts": {
+    "build": "ray build",
+    "dev": "ray develop",
+    "typecheck": "tsc --noEmit"
+  }
+}

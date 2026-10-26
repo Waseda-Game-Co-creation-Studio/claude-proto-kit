@@ -1,0 +1,7 @@
+{
+  "name": "proto-kit",
+  "description": "Web / 3D プロトタイプ、スライド、PV を作って Cloudflare に公開するまでのスキルとコマンド",
+  "author": { "name": "Waseda-Game-Co-creation-Studio" },
+  "homepage": "https://github.com/Waseda-Game-Co-creation-Studio/claude-proto-kit",
+  "license": "MIT"
+}
