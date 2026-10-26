@@ -5,6 +5,20 @@ description: Write a presentation with Slidev (Markdown + Vue + UnoCSS/Tailwind 
 
 # Slides (Slidev)
 
+## Content first
+
+The deck's content comes from the user, not from this skill.
+
+1. Collect the topic, who it is for, about how many slides, and the source material: files or URLs the user points
+   to (a game design doc, notes, a prototype in this repo), plus anything said in the conversation. Ask once, in
+   one message, only for what is missing (see `/new`).
+2. Write a one-line-per-slide outline and show it to the user before writing the deck. Skip this for 5 slides or
+   fewer, or when the user said to just make it.
+3. Use only facts from the sources. A missing figure or name becomes a visible `TODO` on the slide, never an
+   invented one.
+4. A game pitch usually runs: title, the one-line hook, how it plays (embed the prototype), what makes it fun,
+   target players, next steps. Embed a live prototype from this repo instead of describing it.
+
 ## Scaffold (non-interactive)
 
 ```bash
