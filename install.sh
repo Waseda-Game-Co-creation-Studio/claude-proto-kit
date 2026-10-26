@@ -22,7 +22,7 @@ if ! have claude; then
 fi
 export PATH="$HOME/.local/bin:$PATH"
 
-claude plugin marketplace add Waseda-Game-Co-creation-Studio/claude-proto-kit || true
+claude plugin marketplace add https://github.com/Waseda-Game-Co-creation-Studio/claude-proto-kit.git || true
 claude plugin install proto-kit@claude-proto-kit
 claude plugin marketplace add cloudflare/skills || true
 claude plugin install cloudflare@cloudflare

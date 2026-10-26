@@ -22,7 +22,7 @@ if (-not (Have claude)) {
   Refresh-Path
 }
 
-claude plugin marketplace add Waseda-Game-Co-creation-Studio/claude-proto-kit
+claude plugin marketplace add https://github.com/Waseda-Game-Co-creation-Studio/claude-proto-kit.git
 claude plugin install proto-kit@claude-proto-kit
 claude plugin marketplace add cloudflare/skills
 claude plugin install cloudflare@cloudflare

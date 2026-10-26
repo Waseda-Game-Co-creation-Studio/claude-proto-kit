@@ -24,7 +24,7 @@ curl -fsSL https://raw.githubusercontent.com/Waseda-Game-Co-creation-Studio/clau
 Claude Code が入っているなら、次の 2 行でも同じ：
 
 ```text
-/plugin marketplace add Waseda-Game-Co-creation-Studio/claude-proto-kit
+/plugin marketplace add https://github.com/Waseda-Game-Co-creation-Studio/claude-proto-kit.git
 /plugin install proto-kit@claude-proto-kit
 ```
 

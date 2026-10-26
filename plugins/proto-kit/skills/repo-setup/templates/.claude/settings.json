@@ -2,8 +2,8 @@
   "extraKnownMarketplaces": {
     "claude-proto-kit": {
       "source": {
-        "source": "github",
-        "repo": "Waseda-Game-Co-creation-Studio/claude-proto-kit"
+        "source": "git",
+        "url": "https://github.com/Waseda-Game-Co-creation-Studio/claude-proto-kit.git"
       },
       "autoUpdate": true
     },
