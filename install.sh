@@ -76,6 +76,17 @@ claude plugin install proto-kit@claude-proto-kit
 claude plugin marketplace add cloudflare/skills || true
 claude plugin install cloudflare@cloudflare
 
+# --- Default instructions for Claude in every folder (never overwrite) -------
+CLAUDE_MD="$HOME/.claude/CLAUDE.md"
+if [ -e "$CLAUDE_MD" ]; then
+  echo "Kept your existing $CLAUDE_MD (not changed)."
+else
+  mkdir -p "$HOME/.claude"
+  curl -fsSL -o "$CLAUDE_MD" \
+    https://raw.githubusercontent.com/Waseda-Game-Co-creation-Studio/claude-proto-kit/main/home/CLAUDE.md
+  echo "Placed default instructions at $CLAUDE_MD (edit it freely)."
+fi
+
 echo
 echo "Done. Open a NEW terminal, then:"
 echo "  1. Type  claude  and log in (first time only)"

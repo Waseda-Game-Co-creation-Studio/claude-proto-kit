@@ -63,6 +63,16 @@ Claude がどのスキルを使うかは、頼んだ内容とスキルの説明�
 | pnpm | `npm install -g pnpm` | 同左（失敗したら pnpm 公式のインストーラ） |
 | Claude Code | 公式インストーラ | 同左 |
 | プラグイン | `proto-kit@claude-proto-kit` と Cloudflare 公式 | 同左 |
+| `~/.claude/CLAUDE.md` | 無ければ [home/CLAUDE.md](../home/CLAUDE.md) を置く（あれば変更しない） | 同左 |
+
+### ホームの CLAUDE.md
+
+`~/.claude/CLAUDE.md` は、どのフォルダで Claude を使っても読み込まれる「全体へのお願い」。初心者向けの初期値として、
+話し方（やさしく、専門用語は説明する）、進め方（作業前に伝える、削除・公開・お金がかかる操作の前は確認する）、
+コーディング、アイデア出し、文章・調べもの、試作品づくりの基本を書いてある。
+
+自分に合わせて自由に書き換えてよい。インストーラを再実行しても上書きしない。初期値に戻したいときは、ファイルを消してから
+インストーラをもう一度実行する。
 
 Windows で winget（アプリ インストーラー）が無い場合は、Microsoft Store から入れてからもう一度実行する。
 Windows の PowerShell で Mac 用の `curl -fsSL …` を実行すると、`curl` が別のコマンドのためエラーになる。
