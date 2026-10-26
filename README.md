@@ -8,17 +8,22 @@ Claude Code で、Web / 3D プロトタイプ・スライド・PV を作って�
 
 ## インストール（1回だけ）
 
-**Windows（PowerShell）**
+OS に合わせて、どちらか 1 行だけを実行する。
+
+**Windows**：PowerShell に貼り付ける
 
 ```powershell
 irm https://raw.githubusercontent.com/Waseda-Game-Co-creation-Studio/claude-proto-kit/main/install.ps1 | iex
 ```
 
-**Mac / Linux**
+**Mac / Linux**：ターミナル（zsh / bash）に貼り付ける
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Waseda-Game-Co-creation-Studio/claude-proto-kit/main/install.sh | bash
 ```
+
+> Windows の PowerShell で `curl -fsSL …` を実行すると「パラメーター名 'fsSL' に一致するパラメーターが見つかりません」と
+> エラーになる（PowerShell の `curl` は別のコマンドのため）。Windows では上の `irm … | iex` を使う。
 
 足りなければ Node.js・Git・pnpm・Claude Code を入れ、`proto-kit` と Cloudflare 公式プラグインをユーザー単位で登録する。
 Claude Code が入っているなら、次の 2 行でも同じ：
