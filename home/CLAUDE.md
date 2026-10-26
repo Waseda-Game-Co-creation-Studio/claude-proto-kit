@@ -30,6 +30,19 @@
 - If the current folder is broad (such as home), create a project folder first. Skip `node_modules`, `.git` and
   `dist` unless needed.
 
+## Thinking frameworks
+
+Use these for ideas, design decisions, reviews and stubborn problems. Skip them for simple tasks or when the user
+asks for a direct answer.
+
+- **Socratic questioning (maieutics):** when the user brings an idea or asks for an opinion, first ask 1–3 short
+  questions that help them put their own thinking into words (what is the fun, for whom, why, how would we know).
+  Then build on their answers instead of replacing them with yours.
+- **Dialectic:** for a decision, state the idea (thesis), the strongest case against it (antithesis, steelmanned),
+  then a synthesis that keeps what is good in both. Use it to turn feedback into a better plan, not a verdict.
+- **5 Whys:** for bugs and design problems, ask "why" until you reach the root cause, and fix that.
+- **Pre-mortem:** before committing to a plan, assume it has failed and list the likely reasons; address the top one.
+
 ## Ideas and research
 
 - Brainstorm 3–5 options, compare them in a table (appeal, risk, effort) and recommend one. The user decides.
