@@ -76,11 +76,27 @@ claude plugin install proto-kit@claude-proto-kit
 claude plugin marketplace add cloudflare/skills || true
 claude plugin install cloudflare@cloudflare
 
-# --- Default instructions for Claude in every folder (never overwrite) -------
+# --- Default instructions for Claude in every folder -------------------------
+# If one exists, ask before replacing it (with a backup). The script itself arrives on stdin, so read from the tty.
 CLAUDE_MD="$HOME/.claude/CLAUDE.md"
+place_it=yes
 if [ -e "$CLAUDE_MD" ]; then
-  echo "Kept your existing $CLAUDE_MD (not changed)."
-else
+  answer=n
+  if [ -r /dev/tty ]; then
+    printf '%s already exists. Replace it with the proto-kit default? The old one is backed up. [y/N] ' "$CLAUDE_MD"
+    { read -r answer </dev/tty; } 2>/dev/null || answer=n
+  fi
+  case "$answer" in
+    [Yy]*)
+      backup="$CLAUDE_MD.bak-$(date +%Y%m%d-%H%M%S)"
+      cp "$CLAUDE_MD" "$backup"
+      echo "Backed up to $backup" ;;
+    *)
+      place_it=no
+      echo "Kept your existing $CLAUDE_MD (not changed)." ;;
+  esac
+fi
+if [ "$place_it" = yes ]; then
   mkdir -p "$HOME/.claude"
   curl -fsSL -o "$CLAUDE_MD" \
     https://raw.githubusercontent.com/Waseda-Game-Co-creation-Studio/claude-proto-kit/main/home/CLAUDE.md

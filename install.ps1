@@ -31,12 +31,22 @@ claude plugin install proto-kit@claude-proto-kit
 claude plugin marketplace add cloudflare/skills
 claude plugin install cloudflare@cloudflare
 
-# Default instructions for Claude in every folder (beginner-friendly). Never overwrite an existing file.
+# Default instructions for Claude in every folder. If one exists, ask before replacing it (with a backup).
 $claudeDir = Join-Path $HOME '.claude'
 $claudeMd = Join-Path $claudeDir 'CLAUDE.md'
+$placeIt = $true
 if (Test-Path $claudeMd) {
-  Write-Host "Kept your existing $claudeMd (not changed)."
-} else {
+  $answer = Read-Host "$claudeMd already exists. Replace it with the proto-kit default? The old one is backed up. [y/N]"
+  if ($answer -match '^[Yy]') {
+    $backup = "$claudeMd.bak-$(Get-Date -Format yyyyMMdd-HHmmss)"
+    Copy-Item $claudeMd $backup
+    Write-Host "Backed up to $backup"
+  } else {
+    $placeIt = $false
+    Write-Host "Kept your existing $claudeMd (not changed)."
+  }
+}
+if ($placeIt) {
   New-Item -ItemType Directory -Force $claudeDir | Out-Null
   Invoke-WebRequest -UseBasicParsing -OutFile $claudeMd `
     -Uri 'https://raw.githubusercontent.com/Waseda-Game-Co-creation-Studio/claude-proto-kit/main/home/CLAUDE.md'
