@@ -188,6 +188,8 @@ git clone https://github.com/Waseda-Game-Co-creation-Studio/claude-proto-kit.git
 - 有料の API を呼ぶ Worker を公開するときは、レート制限を付ける
 - Remotion は、個人と 3 名以下の組織なら無料。4 名以上の営利組織は企業ライセンスが必要
 - Playwright の録画は約 25fps
+- GPU：Remotion は `--gl=angle`（雛形の既定）、`/capture` は雛形の起動オプションで GPU を使う（Windows で確認）。
+  ただし軽いシーンでは書き出し時間はほぼ変わらず、時間の大半はフレームの取り込みとエンコード。GPU が効くのは重い 3D シーン
 
 ## 開発
 

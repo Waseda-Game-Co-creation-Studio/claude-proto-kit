@@ -39,6 +39,8 @@ public/            # models (.glb), textures, audio
 - Keep scene components free of DOM and global state, and let animated components accept an optional `time` prop.
   That way the same component can be rendered as video by Remotion (`@remotion/three`) driven by the frame number.
 - Prefer drei helpers (OrbitControls, Environment, Text, etc.) over hand-written equivalents.
+- R3F's default camera looks at the origin. When the action happens elsewhere, aim it with
+  `onCreated={({ camera }) => camera.lookAt(x, y, z)}`, and reload the page to check (hot reload keeps the old camera).
 
 ## Game prototypes
 
