@@ -1,34 +1,82 @@
 #!/usr/bin/env bash
 # claude-proto-kit installer for macOS / Linux. Run once per machine; safe to run again.
 #   curl -fsSL https://raw.githubusercontent.com/Waseda-Game-Co-creation-Studio/claude-proto-kit/main/install.sh | bash
-# Installs Node.js, Git, pnpm and Claude Code if missing, then the proto-kit and Cloudflare plugins at user level,
-# so every repository can use them without any per-repo setup.
+# Installs whatever is missing (Node.js, Git, pnpm, Claude Code) without needing Homebrew or sudo where possible,
+# then registers the proto-kit and Cloudflare plugins for this user, so every folder can use them.
 set -eu
 
 have() { command -v "$1" >/dev/null 2>&1; }
+say() { printf '\n==> %s\n' "$1"; }
 
-if [ "$(uname)" = "Darwin" ] && have brew; then
-  have node || brew install node
-  have git  || brew install git
-fi
-if ! have node || ! have git; then
-  echo "Please install Node.js (20.19+ or 22.13+) and Git, then run this again." >&2
-  exit 1
+OS="$(uname -s)"
+LOCAL="$HOME/.local"
+mkdir -p "$LOCAL/bin"
+export PATH="$LOCAL/node/bin:$LOCAL/bin:$PATH"
+
+# Add a line to the shell startup files so new terminals find what we installed
+persist_path() {
+  line="export PATH=\"$1:\$PATH\""
+  for rc in "$HOME/.zshrc" "$HOME/.bashrc"; do
+    [ -f "$rc" ] || [ "$rc" = "$HOME/.zshrc" -a "$OS" = "Darwin" ] || continue
+    grep -qsF "$line" "$rc" || printf '\n%s\n' "$line" >> "$rc"
+  done
+}
+
+# --- Git --------------------------------------------------------------------
+if ! have git; then
+  if [ "$OS" = "Darwin" ]; then
+    say "Installing Git (Apple Command Line Tools). A dialog will open: click Install."
+    xcode-select --install || true
+    echo "When that installation has finished, run this installer again."
+    exit 0
+  elif have apt-get; then
+    say "Installing Git"
+    sudo apt-get update -y && sudo apt-get install -y git
+  elif have dnf; then
+    sudo dnf install -y git
+  else
+    echo "Please install Git with your package manager, then run this again." >&2
+    exit 1
+  fi
 fi
 
-have pnpm || npm install -g pnpm
+# --- Node.js (latest 22.x LTS, into ~/.local/node) ---------------------------
+if ! have node; then
+  say "Installing Node.js"
+  case "$(uname -m)" in
+    arm64|aarch64) arch=arm64 ;;
+    *) arch=x64 ;;
+  esac
+  [ "$OS" = "Darwin" ] && platform=darwin || platform=linux
+  version="$(curl -fsSL https://nodejs.org/dist/index.json | grep -o '"version":"v22\.[0-9.]*"' | head -1 | cut -d'"' -f4)"
+  tmp="$(mktemp -d)"
+  curl -fsSL "https://nodejs.org/dist/$version/node-$version-$platform-$arch.tar.gz" | tar -xz -C "$tmp"
+  rm -rf "$LOCAL/node"
+  mv "$tmp/node-$version-$platform-$arch" "$LOCAL/node"
+  persist_path "$LOCAL/node/bin"
+fi
+
+# --- pnpm -------------------------------------------------------------------
+if ! have pnpm; then
+  say "Installing pnpm"
+  npm install -g pnpm || curl -fsSL https://get.pnpm.io/install.sh | sh -
+fi
+
+# --- Claude Code ------------------------------------------------------------
 if ! have claude; then
+  say "Installing Claude Code"
   curl -fsSL https://claude.ai/install.sh | bash
+  persist_path "$LOCAL/bin"
 fi
-export PATH="$HOME/.local/bin:$PATH"
 
+# --- Plugins ----------------------------------------------------------------
+say "Registering the proto-kit and Cloudflare plugins"
 claude plugin marketplace add https://github.com/Waseda-Game-Co-creation-Studio/claude-proto-kit.git || true
 claude plugin install proto-kit@claude-proto-kit
 claude plugin marketplace add cloudflare/skills || true
 claude plugin install cloudflare@cloudflare
 
 echo
-echo "Done. Next:"
-echo "  1. Log in:  claude   and   npx wrangler login   (approve in the browser within 2 minutes)"
-echo "  2. Open any folder (even an empty one) in Claude Code and type:  /new web hello"
-echo "     The folder is set up automatically the first time."
+echo "Done. Open a NEW terminal, then:"
+echo "  1. Type  claude  and log in (first time only)"
+echo "  2. Tell Claude what you want, e.g.  \"Make a spinning 3D cube and publish it\""

@@ -14,6 +14,10 @@ function Winget-Install($id) {
   Refresh-Path
 }
 
+if (((-not (Have node)) -or (-not (Have git))) -and (-not (Have winget))) {
+  Write-Host 'winget (App Installer) was not found. Install "App Installer" from the Microsoft Store, then run this again.'
+  return
+}
 if (-not (Have node)) { Winget-Install 'OpenJS.NodeJS.LTS' }
 if (-not (Have git))  { Winget-Install 'Git.Git' }
 if (-not (Have pnpm)) { npm install -g pnpm; Refresh-Path }
@@ -28,7 +32,6 @@ claude plugin marketplace add cloudflare/skills
 claude plugin install cloudflare@cloudflare
 
 Write-Host ''
-Write-Host 'Done. Next:'
-Write-Host '  1. Log in:  claude   and   npx wrangler login   (approve in the browser within 2 minutes)'
-Write-Host '  2. Open any folder (even an empty one) in Claude Code and type:  /new web hello'
-Write-Host '     The folder is set up automatically the first time.'
+Write-Host 'Done. Open a NEW PowerShell window, then:'
+Write-Host '  1. Type  claude  and log in (first time only)'
+Write-Host '  2. Tell Claude what you want, e.g.  "Make a spinning 3D cube and publish it"'

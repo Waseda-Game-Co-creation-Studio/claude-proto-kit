@@ -1,101 +1,66 @@
 # claude-proto-kit
 
-Claude Code で、Web / 3D プロトタイプ・スライド・PV を作って公開するまでを手早くするプラグイン。
-一度インストールすれば、どのフォルダでも `/new` と打つだけで始められる（リポジトリごとの準備は自動）。
+Claude に日本語で頼むだけで、さわれる試作品（Web ページ・3D・スライド・動画）を作り、URL で人に見せられるようにする道具セットです。
+プログラミングの知識がなくても始められます。
 
-*A Claude Code plugin for fast prototyping: web / 3D toys (Vite + React + R3F), slides (Slidev) and promo videos
-(Remotion), published to Cloudflare. Install once; any folder is set up automatically the first time you use it.*
+## はじめかた
 
-## インストール（1回だけ）
+### 1. インストールする（最初の 1 回だけ）
 
-OS に合わせて、どちらか 1 行だけを実行する。
+パソコンに合わせて、どちらか 1 行をコピーして貼り付け、Enter を押します。必要なソフトはすべて自動で入ります。
 
-**Windows**：PowerShell に貼り付ける
+**Windows**：スタートメニューで「PowerShell」を開いて貼り付ける
 
 ```powershell
 irm https://raw.githubusercontent.com/Waseda-Game-Co-creation-Studio/claude-proto-kit/main/install.ps1 | iex
 ```
 
-**Mac / Linux**：ターミナル（zsh / bash）に貼り付ける
+**Mac**：「ターミナル」アプリを開いて貼り付ける
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Waseda-Game-Co-creation-Studio/claude-proto-kit/main/install.sh | bash
 ```
 
-> Windows の PowerShell で `curl -fsSL …` を実行すると「パラメーター名 'fsSL' に一致するパラメーターが見つかりません」と
-> エラーになる（PowerShell の `curl` は別のコマンドのため）。Windows では上の `irm … | iex` を使う。
+### 2. Claude を起動する
 
-足りなければ Node.js・Git・pnpm・Claude Code を入れ、`proto-kit` と Cloudflare 公式プラグインをユーザー単位で登録する。
-Claude Code が入っているなら、次の 2 行でも同じ：
+新しく PowerShell（Mac はターミナル）を開き、`claude` と入力して Enter。初回はブラウザでログインします。
+Claude の有料プラン（Pro 以上）か、Anthropic Console のアカウントが必要です。
 
-```text
-/plugin marketplace add https://github.com/Waseda-Game-Co-creation-Studio/claude-proto-kit.git
-/plugin install proto-kit@claude-proto-kit
-```
+Claude のデスクトップアプリを使う場合は、「Code」タブでフォルダを選ぶだけで同じように使えます。
 
-そのあと一度だけログインする：`claude` と `npx wrangler login`（ブラウザが開いたら 2 分以内に許可）。
+### 3. 作りたいものを頼む
 
-## 使い方
+ふつうの言葉で話しかけます。たとえば：
 
-空のフォルダでも既存のリポジトリでも、Claude Code を開いて：
+- 「マウスで回せる 3D の地球儀を作って」
+- 「この企画を説明するスライドを 5 枚で作って」
+- 「さっきの 3D を使って、10 秒の紹介動画を作って」
+- 「できたものを公開して、URL を教えて」
 
-```text
-/new web hello        Vite + React + R3F のプロトタイプ
-/new slides talk      Slidev のスライド
-/new pv teaser        Remotion の動画
-/deploy               Cloudflare Workers に公開して URL を返す
-/render <Composition> 動画を書き出して R2 にアップロードし、URL を返す
-/capture <URL>        ブラウザの自動操作を録画し、カーソル付きのデモ動画にする
-```
+フォルダの準備や、必要なログインの案内は Claude が自動でやります。
 
-初めて使うフォルダでは、最初のコマンドの前に自動でセットアップされる（`/proto-init` で明示的にも実行できる）：
+## 公開について
 
-| 追加されるもの | 役割 |
+初めて公開するときは、Cloudflare（無料で使えます）のアカウントが必要です。手順は Claude が案内します。
+公開した URL は、知っている人なら誰でも見られます。パスワードや個人情報は入れないでください。
+
+## 近道コマンド（使わなくても大丈夫）
+
+言葉で頼む代わりに、`/` で始まるコマンドでも同じことができます。
+
+| コマンド | すること |
 | --- | --- |
-| `CLAUDE.md` | パッケージの置き場所、Worker 名の接頭辞、Cloudflare の設定欄（最初のデプロイで埋まる） |
-| `pnpm-workspace.yaml`、`package.json` | pnpm ワークスペース。許可するのは esbuild / workerd のビルドと Slidev のスキルだけ |
-| `.claude/settings.json` | `wrangler deploy` や `delete` などの前に承認を求めるルール。共同作業者にもこのプラグインを案内する |
-| `.gitignore`、`.gitattributes` | 動画や秘密情報を入れない、改行を LF に揃える |
+| `/new web 名前` | Web ページ・3D の試作品を作る |
+| `/new slides 名前` | スライドを作る |
+| `/new pv 名前` | 動画を作る |
+| `/deploy` | 公開して URL を返す |
+| `/render` | 動画を書き出して、見られる URL を返す |
+| `/capture URL` | Web ページを自動で操作する様子を録画し、デモ動画にする |
+| `/proto-init` | フォルダの準備だけを先にする（ふだんは自動） |
 
-Cloudflare のアカウントは最初の `/deploy` で聞かれる。複数のアカウント（個人・チーム）に所属していても、
-リポジトリごとの `CLAUDE.md` と `wrangler.jsonc` の `account_id` で分けられる。
+## もっと詳しく
 
-## 中身
-
-| スキル | 内容 |
-| --- | --- |
-| `workflow` | 共通の約束ごと：Cloudflare のアカウント、命名、R2、秘密情報、プレビュー、git |
-| `web-prototype` | Vite + React + R3F の作り方と公開 |
-| `slides` | Slidev の作り方と公開（Slidev 公式スキルと併用） |
-| `capture` | Playwright で操作を録画し、Remotion でカーソル・クリック・ズーム・字幕を付ける |
-| `repo-setup` | 上記の自動セットアップ |
-
-Remotion の公式スキルは `/new pv` のときにリポジトリへ入る。
-
-## ランチャー（任意）
-
-フォルダ名を打つだけで、そのフォルダで Claude Code を開く（候補はホーム直下の git リポジトリ）。
-
-```bash
-git clone https://github.com/Waseda-Game-Co-creation-Studio/claude-proto-kit.git ~/claude-proto-kit
-```
-
-- **Windows（PowerToys Run）**：PowerToys と .NET SDK 9 以上を入れてから
-  `powershell -ExecutionPolicy Bypass -File ~/claude-proto-kit/launcher/powertoys/install.ps1`。
-  `Alt+Space` → フォルダ名 → Enter
-- **Mac（Raycast）**：`cd ~/claude-proto-kit/launcher/raycast && npm install && npm run dev` で読み込み、
-  「Open in Claude Code」にホットキーを割り当てる
-
-## 注意
-
-- workers.dev / r2.dev の URL は、知っていれば誰でも見られる。API キーはフロントに置かない（Worker のシークレットへ）
-- Remotion は、個人と 3 名以下の組織なら無料。4 名以上の営利組織は企業ライセンスが必要
-- プラグインは自動更新されない設定が既定。更新は `/plugin` から（`/proto-init` したリポジトリでは自動更新が有効）
-
-## 開発
-
-- ブランチを切って PR。`plugin.json` に `version` は書かない
-- 手元で試す：`claude --plugin-dir ./plugins/proto-kit`、検証：`claude plugin validate plugins/proto-kit`
+仕組み、Cloudflare の複数アカウントの使い分け、ランチャー、開発者向けの情報は [docs/guide.md](docs/guide.md) にあります。
 
 ## License
 
